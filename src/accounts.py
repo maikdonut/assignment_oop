@@ -75,6 +75,8 @@ class BankAccount(AbstractAccount):
         InvalidOperationError: Если owner_info пустой или валюта неверная.
     """
     def __init__(self, account_id, owner_info, currency="RUB"):
+        if account_id is not None and len(account_id) < 4:
+            raise InvalidOperationError("Некорректный ID счёта")
         if not owner_info:
             raise InvalidOperationError("Нет информации о владельце счета")
         if currency not in ("RUB", "USD", "EUR", "KZT", "CNY"):

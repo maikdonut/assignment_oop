@@ -1,6 +1,8 @@
+from datetime import datetime
 from dataclasses import dataclass, field
 from accounts import InvalidOperationError, BankAccount, AccountStatus
-from datetime import datetime
+from audit import AuditLog, RiskAnalyzer, RiskLevel
+from transactions import Transaction, TransactionType
 
 
 @dataclass
@@ -23,6 +25,8 @@ class Bank:
         self.clients = {}
         self.accounts = {}
         self._failed_attempts = {}
+        self.audit_log = AuditLog()
+        self.risk_analyzer = RiskAnalyzer(self.audit_log)
 
     def add_client(self, client: Client) -> None:
         if client.client_id in self.clients:
@@ -102,24 +106,25 @@ class Bank:
 
     def deposit(self, account_id: str, amount: float) -> None:
         self._check_operating_hours()
-        self._check_suspicious(account_id, amount)
         if account_id not in self.accounts:
             raise InvalidOperationError("Счёт не найден")
+        transaction = Transaction(TransactionType.DEPOSIT, amount, "", account_id)
+        risk = self.risk_analyzer.analyze(transaction)
+        if risk == RiskLevel.HIGH:
+            raise InvalidOperationError("Операция заблокирована: высокий риск")
         self.accounts[account_id].deposit(amount)
 
     def withdraw(self, account_id: str, amount: float) -> None:
         self._check_operating_hours()
-        self._check_suspicious(account_id, amount)
         if account_id not in self.accounts:
             raise InvalidOperationError("Счёт не найден")
+        transaction = Transaction(TransactionType.WITHDRAWAL, amount, account_id, "")
+        risk = self.risk_analyzer.analyze(transaction)
+        if risk == RiskLevel.HIGH:
+            raise InvalidOperationError("Операция заблокирована: высокий риск")
         self.accounts[account_id].withdraw(amount)
 
     def _check_operating_hours(self):
         current_hour = datetime.now().hour
         if 0 <= current_hour < 5:
             raise InvalidOperationError("Операции запрещены с 00:00 до 05:00")
-    
-    def _check_suspicious(self, account_id: str, amount: float) -> None:
-        if amount > 100000:
-            print(f"Подозрительная операция: счёт {account_id}, сумма {amount}")
-

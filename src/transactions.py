@@ -3,7 +3,6 @@ from enum import Enum
 from datetime import datetime
 from dataclasses import dataclass, field
 from accounts import InvalidOperationError, BankAccount, AccountStatus
-from bank import Bank, Client
 
 
 EXCHANGE_RATES = {
@@ -69,7 +68,7 @@ class TransactionQueue:
 
 
 class TransactionProcessor:
-    def __init__(self, bank: Bank, max_retries=3):
+    def __init__(self, bank: "Bank", max_retries=3):
         self.bank = bank
         self.max_retries = max_retries 
 

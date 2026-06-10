@@ -26,7 +26,7 @@ class Bank:
         self.accounts = {}
         self._failed_attempts = {}
         self.audit_log = AuditLog()
-        self.risk_analyzer = RiskAnalyzer(self.audit_log)
+        self.risk_analyzer = RiskAnalyzer(self.audit_log, frequent_ops_limit=20)
 
     def add_client(self, client: Client) -> None:
         if client.client_id in self.clients:

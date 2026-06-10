@@ -1,0 +1,56 @@
+[
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 999999.0,
+      "transaction_id": "3ead9183"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 999999.0,
+      "transaction_id": "3661d7de"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 200000.0,
+      "transaction_id": "5752d6e5"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 200000.0,
+      "transaction_id": "cff2bc96"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 150000.0,
+      "transaction_id": "4e7344be"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Крупная транзакция",
+    "timestamp": "2026-06-10T21:12:21.770808",
+    "details": {
+      "amount": 150000.0,
+      "transaction_id": "18f8a234"
+    }
+  }
+]

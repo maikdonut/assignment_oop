@@ -1,3 +1,4 @@
+import _path  # noqa: F401
 from accounts import AccountStatus, BankAccount, InsufficientFundsError, AccountFrozenError, InvalidOperationError
 from account_types import SavingsAccount, PremiumAccount, InvestmentAccount
 

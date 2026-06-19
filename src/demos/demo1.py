@@ -1,3 +1,4 @@
+import _path  # noqa: F401 — добавляет src/ в sys.path
 from accounts import AccountStatus, BankAccount, InsufficientFundsError, AccountFrozenError
 
 

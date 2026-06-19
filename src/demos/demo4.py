@@ -1,3 +1,4 @@
+import _path  # noqa: F401
 from bank import Bank, Client
 from accounts import BankAccount, InvalidOperationError
 from account_types import PremiumAccount

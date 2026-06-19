@@ -1,6 +1,6 @@
 from bank import Bank, Client
 from accounts import BankAccount, AccountStatus, InvalidOperationError
-from account_types import SavingAccount
+from account_types import SavingsAccount
 
 # создание банка
 bank = Bank("MyBank")
@@ -14,7 +14,7 @@ bank.add_client(client2)
 
 # открытие счетов
 acc1 = BankAccount(account_id=None, owner_info="Иванов И.И.")
-acc2 = SavingAccount(account_id=None, owner_info="Петров П.П.", monthly_rate=0.1)
+acc2 = SavingsAccount(account_id=None, owner_info="Петров П.П.", monthly_rate=0.1)
 
 bank.open_account("c001", acc1)
 bank.open_account("c002", acc2)
@@ -58,4 +58,7 @@ for client in bank.get_clients_ranking():
     print(f"  {client.name}: {sum(bank.accounts[acc_id]._balance for acc_id in client.account_ids if acc_id in bank.accounts)}")
 
 # подозрительная операция
-bank.deposit(acc2.account_id, 200000)
+try:
+    bank.deposit(acc2.account_id, 200000)
+except InvalidOperationError as e:
+    print(f"Заблокировано: {e}")

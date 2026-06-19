@@ -1,0 +1,105 @@
+{
+  "bank": "PyBank",
+  "generated_at": "2026-06-19T20:42:03.604830",
+  "total_balance": 236900,
+  "clients_count": 5,
+  "accounts_count": 5,
+  "transactions": [
+    {
+      "id": "825ce615",
+      "type": "deposit",
+      "amount": 5000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "3517d5b1",
+      "type": "deposit",
+      "amount": 3000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "f6cd44a6",
+      "type": "withdrawal",
+      "amount": 2000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "0aae3f93",
+      "type": "withdrawal",
+      "amount": 5000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "664cdfc3",
+      "type": "transfer",
+      "amount": 10000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "220111f3",
+      "type": "transfer",
+      "amount": 5000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "c41f22d9",
+      "type": "transfer",
+      "amount": 3000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "f873c206",
+      "type": "deposit",
+      "amount": 2000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "2a5d54de",
+      "type": "withdrawal",
+      "amount": 1000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "91603009",
+      "type": "transfer",
+      "amount": 4000,
+      "status": "completed",
+      "failure_reason": "",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "f20f519c",
+      "type": "withdrawal",
+      "amount": 999999,
+      "status": "failed",
+      "failure_reason": "Недостаточно средств",
+      "created_at": "2026-06-19T20:42:03.603830"
+    },
+    {
+      "id": "a6f5429f",
+      "type": "deposit",
+      "amount": 200000,
+      "status": "failed",
+      "failure_reason": "Операция заблокирована: высокий риск",
+      "created_at": "2026-06-19T20:42:03.603830"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 from accounts import AccountStatus, BankAccount, InsufficientFundsError, AccountFrozenError, InvalidOperationError
-from account_types import SavingAccount, PremiumAccount, InvestmentAccount
+from account_types import SavingsAccount, PremiumAccount, InvestmentAccount
 
 
 # SavingAccount
-acc1 = SavingAccount(account_id=None, owner_info="Иванов И.И.", currency="RUB", monthly_rate=0.12)
+acc1 = SavingsAccount(account_id=None, owner_info="Иванов И.И.", currency="RUB", monthly_rate=0.12)
 acc1.deposit(1000) 
 prev_balance = acc1.balance
 acc1.apply_monthly_interest() # добавляем %
@@ -19,7 +19,7 @@ except InsufficientFundsError as e:
     print(e)
 
 try:
-    bad_acc = SavingAccount(account_id=None, owner_info="Иванов И.И.", currency="RUB", min_balance=-50, monthly_rate=0.12)
+    bad_acc = SavingsAccount(account_id=None, owner_info="Иванов И.И.", currency="RUB", min_balance=-50, monthly_rate=0.12)
 except InvalidOperationError as e:
     print(e)
 

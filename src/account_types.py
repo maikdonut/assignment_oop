@@ -1,7 +1,7 @@
-from accounts import BankAccount, AccountStatus, InsufficientFundsError, InvalidOperationError
+from accounts import BankAccount, InsufficientFundsError, InvalidOperationError
 
 
-class SavingAccount(BankAccount):
+class SavingsAccount(BankAccount):
     def __init__(self, account_id, owner_info, currency="RUB", min_balance=0, monthly_rate=0.05):
         if min_balance < 0:
             raise InvalidOperationError("Минимальный остаток не может быть отрицательным")
@@ -20,6 +20,9 @@ class SavingAccount(BankAccount):
             raise InsufficientFundsError("Нельзя снять ниже минимального остатка")
         super().withdraw(amount)
 
+    def get_account_info(self) -> str:
+        return str(self)
+
     def __str__(self) -> str:
         return "\n".join([
             super().__str__(),
@@ -28,13 +31,17 @@ class SavingAccount(BankAccount):
         ])
 
 
+# обратная совместимость
+SavingAccount = SavingsAccount
+
+
 class PremiumAccount(BankAccount):
     def __init__(self, account_id, owner_info, currency="RUB", overdraft_limit=0, transaction_limit=10000, commission=0):
         if transaction_limit < 0:
             raise InvalidOperationError("Лимит транзакций не может быть отрицательным")
         if commission < 0:
             raise InvalidOperationError("Комиссия не может быть отрицательной")
-        super().__init__(account_id, owner_info, currency)  
+        super().__init__(account_id, owner_info, currency)
         self.overdraft_limit = overdraft_limit
         self.transaction_limit = transaction_limit
         self.commission = commission
@@ -50,6 +57,9 @@ class PremiumAccount(BankAccount):
             raise InsufficientFundsError("Недостаточно средств даже с овердрафтом")
         self._balance -= total
 
+    def get_account_info(self) -> str:
+        return str(self)
+
     def __str__(self) -> str:
         return "\n".join([
             super().__str__(),
@@ -57,6 +67,7 @@ class PremiumAccount(BankAccount):
             f"Лимит по транзакции: {self.transaction_limit}",
             f"Комиссия: {self.commission}"
         ])
+
 
 class InvestmentAccount(BankAccount):
     def __init__(self, account_id, owner_info, currency="RUB", portfolio=None):
@@ -66,7 +77,7 @@ class InvestmentAccount(BankAccount):
         for asset, v in portfolio.items():
             self._check_asset(asset, v)
         self.portfolio = portfolio
-    
+
     @staticmethod
     def _check_asset(asset_type, amount):
         if asset_type not in ["stocks", "bonds", "etf"]:
@@ -79,8 +90,14 @@ class InvestmentAccount(BankAccount):
         self.portfolio[asset_type] = self.portfolio.get(asset_type, 0) + amount
 
     def project_yearly_growth(self, rate: float):
-        total = sum(self.portfolio.values())  
-        return total * (1 + rate)  
+        total = sum(self.portfolio.values())
+        return total * (1 + rate)
+
+    def withdraw(self, amount: float) -> None:
+        super().withdraw(amount)
+
+    def get_account_info(self) -> str:
+        return str(self)
 
     def __str__(self) -> str:
         portfolio_items = ", ".join(f"{k}: {v}" for k, v in self.portfolio.items())

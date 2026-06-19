@@ -1,6 +1,7 @@
 from bank import Bank, Client
 from accounts import BankAccount, InvalidOperationError
 from account_types import PremiumAccount
+from datetime import datetime, timedelta
 from transactions import Transaction, TransactionQueue, TransactionProcessor, TransactionType
 
 # банк и клиенты
@@ -16,7 +17,7 @@ bank.add_client(client3)
 
 # счета
 acc1 = BankAccount(account_id=None, owner_info="Иванов И.И.")
-acc2 = BankAccount(account_id=None, owner_info="Петров П.П.")
+acc2 = BankAccount(account_id=None, owner_info="Петров П.П.", currency="USD")
 acc3 = PremiumAccount(account_id=None, owner_info="Сидоров С.С.", overdraft_limit=5000, commission=50)
 
 bank.open_account("c001", acc1)
@@ -39,26 +40,39 @@ transactions = [
     Transaction(TransactionType.DEPOSIT,    500,   "",              acc3.account_id),
     Transaction(TransactionType.WITHDRAWAL, 99999, acc1.account_id, ""),   # упадёт
     Transaction(TransactionType.TRANSFER,   100,   acc3.account_id, acc1.account_id, commission=10),
-    Transaction(TransactionType.DEPOSIT, 3000, "", acc3.account_id),
+    Transaction(
+        TransactionType.TRANSFER, 500, acc1.account_id, "external-999",
+        is_external=True,
+    ),
 ]
 
 # очередь
 queue = TransactionQueue()
-for t in transactions[:-1]:
+for t in transactions[:-2]:
     queue.add(t)
-queue.add(transactions[-1], priority=True)  # последняя с приоритетом
+
+# отложенная транзакция (выполнится сразу — время в прошлом)
+scheduled = Transaction(TransactionType.DEPOSIT, 3000, "", acc3.account_id)
+queue.schedule(scheduled, datetime.now() - timedelta(seconds=1))
+
+queue.add(transactions[-2])
+queue.add(transactions[-1], priority=True)
+
+print(f"Транзакций в очереди: {queue.pending_count}")
 
 # обработка
 processor = TransactionProcessor(bank, max_retries=2)
 processor.process_queue(queue)
 
+all_transactions = transactions + [scheduled]
+
 # результаты
-print("Статусы транзакций:")
-for t in transactions:
+print("\nСтатусы транзакций:")
+for t in all_transactions:
     print(f"  {t.transaction_id} | {t.transaction_type.value} | {t.amount} | {t.status.value} | {t.failure_reason or 'OK'}")
 
 print(f"\nБалансы:")
-print(f"  Иванов: {acc1.balance}")
-print(f"  Петров: {acc2.balance}")
-print(f"  Сидоров: {acc3.balance}")
+print(f"  Иванов: {acc1.balance} {acc1.currency}")
+print(f"  Петров: {acc2.balance} {acc2.currency}")
+print(f"  Сидоров: {acc3.balance} {acc3.currency}")
 print(f"\nОбщий баланс банка: {bank.get_total_balance()}")

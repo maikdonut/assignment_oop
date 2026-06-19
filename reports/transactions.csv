@@ -1,0 +1,13 @@
+id,type,amount,currency,sender,receiver,status,failure_reason,created_at
+825ce615,deposit,5000,RUB,,c02fbd9b,completed,,2026-06-19T20:42:03.603830
+3517d5b1,deposit,3000,RUB,,59b14188,completed,,2026-06-19T20:42:03.603830
+f6cd44a6,withdrawal,2000,RUB,c02fbd9b,,completed,,2026-06-19T20:42:03.603830
+0aae3f93,withdrawal,5000,RUB,f6bf523b,,completed,,2026-06-19T20:42:03.603830
+664cdfc3,transfer,10000,RUB,c02fbd9b,59b14188,completed,,2026-06-19T20:42:03.603830
+220111f3,transfer,5000,RUB,5a055a3c,05a126e3,completed,,2026-06-19T20:42:03.603830
+c41f22d9,transfer,3000,RUB,59b14188,c02fbd9b,completed,,2026-06-19T20:42:03.603830
+f873c206,deposit,2000,RUB,,05a126e3,completed,,2026-06-19T20:42:03.603830
+2a5d54de,withdrawal,1000,RUB,05a126e3,,completed,,2026-06-19T20:42:03.603830
+91603009,transfer,4000,RUB,f6bf523b,c02fbd9b,completed,,2026-06-19T20:42:03.603830
+f20f519c,withdrawal,999999,RUB,c02fbd9b,,failed,Недостаточно средств,2026-06-19T20:42:03.603830
+a6f5429f,deposit,200000,RUB,,f6bf523b,failed,Операция заблокирована: высокий риск,2026-06-19T20:42:03.603830

@@ -1,56 +1,391 @@
 [
   {
     "level": "warning",
-    "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "message": "Перевод на новый счёт",
+    "timestamp": "2026-06-19T20:41:34.791558",
     "details": {
-      "amount": 999999.0,
-      "transaction_id": "3ead9183"
+      "transaction_id": "95215373",
+      "sender_id": "b21076a6",
+      "receiver_id": "b1e34d56",
+      "client_id": "c002"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.791558",
+    "details": {
+      "client_id": "c002",
+      "transaction_id": "95215373",
+      "risk_level": "MEDIUM",
+      "amount": 1200
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Перевод на новый счёт",
+    "timestamp": "2026-06-19T20:41:34.792562",
+    "details": {
+      "transaction_id": "d1711690",
+      "sender_id": "b7370291",
+      "receiver_id": "992f10db",
+      "client_id": "c003"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.792562",
+    "details": {
+      "client_id": "c003",
+      "transaction_id": "d1711690",
+      "risk_level": "MEDIUM",
+      "amount": 1800
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Перевод на новый счёт",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "517f110b",
+      "sender_id": "b1e34d56",
+      "receiver_id": "1f00bc45",
+      "client_id": "c008"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c008",
+      "transaction_id": "517f110b",
+      "risk_level": "MEDIUM",
+      "amount": 2200
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "39ab7ced",
+      "client_id": "c005",
+      "count": 21
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c005",
+      "transaction_id": "39ab7ced",
+      "risk_level": "HIGH",
+      "amount": 800
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "39ab7ced",
+      "client_id": "c005",
+      "count": 22
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c005",
+      "transaction_id": "39ab7ced",
+      "risk_level": "HIGH",
+      "amount": 800
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Перевод на новый счёт",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "b6896909",
+      "sender_id": "34b4edf1",
+      "receiver_id": "eadd6cc7",
+      "client_id": "c001"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "b6896909",
+      "risk_level": "MEDIUM",
+      "amount": 600
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Перевод на новый счёт",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "40b29f36",
+      "sender_id": "da7b4756",
+      "receiver_id": "d6d104b0",
+      "client_id": "c004"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c004",
+      "transaction_id": "40b29f36",
+      "risk_level": "MEDIUM",
+      "amount": 500
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "e88f3846",
+      "client_id": "c001",
+      "count": 23
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "e88f3846",
+      "risk_level": "HIGH",
+      "amount": 1500
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "e88f3846",
+      "client_id": "c001",
+      "count": 24
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "e88f3846",
+      "risk_level": "HIGH",
+      "amount": 1500
     }
   },
   {
     "level": "warning",
     "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "timestamp": "2026-06-19T20:41:34.793559",
     "details": {
-      "amount": 999999.0,
-      "transaction_id": "3661d7de"
+      "amount": 200000,
+      "transaction_id": "3e7f6cf1",
+      "client_id": "c003"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "3e7f6cf1",
+      "client_id": "c003",
+      "count": 25
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c003",
+      "transaction_id": "3e7f6cf1",
+      "risk_level": "HIGH",
+      "amount": 200000
     }
   },
   {
     "level": "warning",
     "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "timestamp": "2026-06-19T20:41:34.793559",
     "details": {
-      "amount": 200000.0,
-      "transaction_id": "5752d6e5"
+      "amount": 200000,
+      "transaction_id": "3e7f6cf1",
+      "client_id": "c003"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "3e7f6cf1",
+      "client_id": "c003",
+      "count": 26
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c003",
+      "transaction_id": "3e7f6cf1",
+      "risk_level": "HIGH",
+      "amount": 200000
     }
   },
   {
     "level": "warning",
     "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "timestamp": "2026-06-19T20:41:34.793559",
     "details": {
-      "amount": 200000.0,
-      "transaction_id": "cff2bc96"
+      "amount": 150000,
+      "transaction_id": "682bead6",
+      "client_id": "c006"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "682bead6",
+      "client_id": "c006",
+      "count": 27
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c006",
+      "transaction_id": "682bead6",
+      "risk_level": "HIGH",
+      "amount": 150000
     }
   },
   {
     "level": "warning",
     "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "timestamp": "2026-06-19T20:41:34.793559",
     "details": {
-      "amount": 150000.0,
-      "transaction_id": "4e7344be"
+      "amount": 150000,
+      "transaction_id": "682bead6",
+      "client_id": "c006"
     }
   },
   {
     "level": "warning",
-    "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T21:12:21.770808",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
     "details": {
-      "amount": 150000.0,
-      "transaction_id": "18f8a234"
+      "transaction_id": "682bead6",
+      "client_id": "c006",
+      "count": 28
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c006",
+      "transaction_id": "682bead6",
+      "risk_level": "HIGH",
+      "amount": 150000
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "3eb74aac",
+      "client_id": "c001",
+      "count": 29
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "3eb74aac",
+      "risk_level": "HIGH",
+      "amount": 1000
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "3eb74aac",
+      "client_id": "c001",
+      "count": 30
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "3eb74aac",
+      "risk_level": "HIGH",
+      "amount": 1000
+    }
+  },
+  {
+    "level": "critical",
+    "message": "Клиент заблокирован после неверных попыток входа",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c002"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Частые операции",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "transaction_id": "125bb1a8",
+      "client_id": "c005",
+      "count": 31
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:41:34.793559",
+    "details": {
+      "client_id": "c005",
+      "transaction_id": "125bb1a8",
+      "risk_level": "HIGH",
+      "amount": 1000
     }
   }
 ]

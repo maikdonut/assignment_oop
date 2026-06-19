@@ -49,6 +49,10 @@ bank.audit_log.log_message(AuditLevel.CRITICAL, "Тестовая критиче
 # отчёт аудита
 report = AuditReport(bank.audit_log)
 
+print("\n=== Риск-профиль клиента c001 ===")
+for entry in report.get_client_risk_profile("c001"):
+    print(f"  [{entry.level.value}] {entry.message} | {entry.details}")
+
 print("\n=== Подозрительные записи ===")
 for entry in report.get_suspicious_operations():
     print(f"  [{entry.level.value}] {entry.timestamp.strftime('%H:%M:%S')} — {entry.message} | {entry.details}")

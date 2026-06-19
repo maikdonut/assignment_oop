@@ -2,16 +2,28 @@
   {
     "level": "warning",
     "message": "Крупная транзакция",
-    "timestamp": "2026-06-10T19:30:23.454478",
+    "timestamp": "2026-06-19T20:42:03.053680",
     "details": {
       "amount": 200000,
-      "transaction_id": "b6f53687"
+      "transaction_id": "f887495e",
+      "client_id": "c001"
+    }
+  },
+  {
+    "level": "warning",
+    "message": "Подозрительная операция",
+    "timestamp": "2026-06-19T20:42:03.053680",
+    "details": {
+      "client_id": "c001",
+      "transaction_id": "f887495e",
+      "risk_level": "HIGH",
+      "amount": 200000
     }
   },
   {
     "level": "warning",
     "message": "Тестовая подозрительная операция",
-    "timestamp": "2026-06-10T19:30:23.454478",
+    "timestamp": "2026-06-19T20:42:03.053680",
     "details": {
       "client_id": "c001",
       "amount": 99999
@@ -20,7 +32,7 @@
   {
     "level": "critical",
     "message": "Тестовая критическая операция",
-    "timestamp": "2026-06-10T19:30:23.454478",
+    "timestamp": "2026-06-19T20:42:03.053680",
     "details": {
       "client_id": "c002",
       "amount": 500000

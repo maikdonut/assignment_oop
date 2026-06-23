@@ -103,9 +103,9 @@ class TransactionProcessor:
 
     def process(self, transaction: Transaction, attempt=1):
         try:
-            self._validate_transaction(transaction)
             if attempt == 1:
                 self._apply_commission(transaction)
+            self._validate_transaction(transaction)
 
             if transaction.transaction_type == TransactionType.DEPOSIT:
                 self.bank.deposit(
@@ -134,6 +134,19 @@ class TransactionProcessor:
                 return self.process(transaction, attempt + 1)
             transaction.status = TransactionStatus.FAILED
             transaction.failure_reason = str(e)
+            from audit import AuditLevel
+            self.bank.audit_log.log_message(
+                AuditLevel.CRITICAL,
+                "Ошибка обработки транзакции",
+                {
+                    "transaction_id": transaction.transaction_id,
+                    "transaction_type": transaction.transaction_type.value,
+                    "failure_reason": str(e),
+                    "client_id": self.bank.get_client_id_for_account(
+                        transaction.sender_id or transaction.receiver_id
+                    ),
+                },
+            )
             return False
 
     def process_queue(self, queue: TransactionQueue) -> None:
@@ -173,39 +186,60 @@ class TransactionProcessor:
                 if total > sender.balance:
                     raise InsufficientFundsError("Недостаточно средств")
 
+        if transaction.transaction_type == TransactionType.TRANSFER:
+            sender = self.bank.accounts.get(transaction.sender_id)
+            receiver = self.bank.accounts.get(transaction.receiver_id)
+            if sender and receiver and sender.currency != receiver.currency:
+                self._convert_currency(
+                    transaction.amount, sender.currency, receiver.currency
+                )
+
     def _process_transfer(self, transaction: Transaction) -> None:
         self.bank._evaluate_risk(transaction)
 
         sender = self.bank.accounts[transaction.sender_id]
-        withdraw_amount = transaction.amount
+        receiver = self.bank.accounts.get(transaction.receiver_id)
+        transfer_amount = transaction.amount
+        total_debit = transfer_amount + transaction.commission
 
-        self.bank.withdraw(
-            transaction.sender_id, withdraw_amount, transaction=transaction, skip_risk=True
-        )
-
-        if transaction.receiver_id in self.bank.accounts:
-            receiver = self.bank.accounts[transaction.receiver_id]
+        deposit_amount = transfer_amount
+        if receiver:
             deposit_amount = self._convert_currency(
-                withdraw_amount, sender.currency, receiver.currency
-            )
-            self.bank.deposit(
-                transaction.receiver_id,
-                deposit_amount,
-                transaction.transaction_id,
-                transaction=transaction,
-                skip_risk=True,
-                skip_record=True,
+                transfer_amount, sender.currency, receiver.currency
             )
 
-        self.bank._finalize_operation(transaction)
+        sender_balance = sender._balance
+        receiver_balance = receiver._balance if receiver else None
+
+        try:
+            self.bank.withdraw(
+                transaction.sender_id, total_debit, transaction=transaction, skip_risk=True
+            )
+
+            if receiver:
+                self.bank.deposit(
+                    transaction.receiver_id,
+                    deposit_amount,
+                    transaction.transaction_id,
+                    transaction=transaction,
+                    skip_risk=True,
+                    skip_record=True,
+                )
+
+            self.bank._finalize_operation(transaction)
+        except Exception:
+            sender._balance = sender_balance
+            if receiver is not None and receiver_balance is not None:
+                receiver._balance = receiver_balance
+            raise
 
     def _apply_commission(self, transaction: Transaction) -> None:
         if transaction.commission > 0:
-            transaction.amount += transaction.commission
-        elif transaction.is_external:
-            fee = round(transaction.amount * EXTERNAL_COMMISSION_RATE, 2)
-            transaction.commission = fee
-            transaction.amount += fee
+            return
+        if transaction.is_external:
+            transaction.commission = round(
+                transaction.amount * EXTERNAL_COMMISSION_RATE, 2
+            )
 
     def _convert_currency(self, amount: float, from_currency: str, to_currency: str) -> float:
         if from_currency == to_currency:

@@ -44,11 +44,16 @@ class Bank:
         self.accounts[account.account_id] = account
         self.clients[client_id].account_ids.append(account.account_id)
 
+    def _ensure_account_owned(self, client_id: str, account_id: str) -> None:
+        if account_id not in self.clients[client_id].account_ids:
+            raise InvalidOperationError("Счёт не принадлежит клиенту")
+
     def close_account(self, client_id: str, account_id: str) -> None:
         if client_id not in self.clients:
             raise InvalidOperationError("Клиент не найден")
         if account_id not in self.accounts:
             raise InvalidOperationError("Аккаунт не существует")
+        self._ensure_account_owned(client_id, account_id)
         self.accounts[account_id].status = AccountStatus.CLOSED
 
     def freeze_account(self, client_id: str, account_id: str) -> None:
@@ -56,6 +61,7 @@ class Bank:
             raise InvalidOperationError("Клиент не найден")
         if account_id not in self.accounts:
             raise InvalidOperationError("Аккаунт не существует")
+        self._ensure_account_owned(client_id, account_id)
         if self.accounts[account_id].status == AccountStatus.CLOSED:
             raise InvalidOperationError("Счет закрыт")
         self.accounts[account_id].status = AccountStatus.FROZEN
@@ -65,6 +71,7 @@ class Bank:
             raise InvalidOperationError("Клиент не найден")
         if account_id not in self.accounts:
             raise InvalidOperationError("Аккаунт не существует")
+        self._ensure_account_owned(client_id, account_id)
         if self.accounts[account_id].status == AccountStatus.CLOSED:
             raise InvalidOperationError("Счет закрыт")
         self.accounts[account_id].status = AccountStatus.ACTIVE

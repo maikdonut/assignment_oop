@@ -16,6 +16,7 @@ class SavingsAccount(BankAccount):
         self._balance += self._balance * self.monthly_rate
 
     def withdraw(self, amount: float) -> None:
+        self._check_status()
         if self._balance - amount < self.min_balance:
             raise InsufficientFundsError("Нельзя снять ниже минимального остатка")
         super().withdraw(amount)
